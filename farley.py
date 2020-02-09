@@ -1,6 +1,7 @@
 import click
 import json
 import os
+import twitter as twitterAPI
 
 from stravaio import StravaIO
 
@@ -24,9 +25,22 @@ def printListing(person):
     click.echo(listing)
 
 
+def readEnvironment():
+    'This function reads in the environment variables form a file if needed'
+    if os.path.isfile('.env') is True:
+        with open('.env', 'r') as file:
+            for line in file:
+                if line.startswith('#'):
+                    continue
+                # Remove leading `export `
+                # then, split name / value pair
+                key, value = line.split('=', 1)
+                os.environ[key] = value
+
+
 @click.group()
 def cli():
-    click.echo('Hello World!')
+    click.echo('FarleyFile processing...')
     pass
 
 
@@ -75,11 +89,34 @@ def strava(token):
     for key in athlete.keys():
         click.echo('{}: {}'.format(key, str(athlete[key])))
 
+
+@click.command()
+def twitter():
+    click.echo('Getting Twitter...')
+    print('key: {}'.format(os.environ['TWITTER_API_ACCESS_TOKEN']))
+    client = twitterAPI.Api(consumer_key=os.environ['TWITTER_API_KEY'],
+                         consumer_secret=os.environ['TWITTER_API_SECRET_KEY'],
+                         access_token_key=os.environ['TWITTER_API_ACCESS_TOKEN'],
+                         access_token_secret=os.environ['TWITTER_API_ACCESS_TOKEN_SECRET'])
+    click.echo(client)
+    cred = client.VerifyCredentials()
+    click.echo(cred)
+    #user = client.GetUser('wogsland')
+    #token = client.GetAppOnlyAuthToken(consumer_key=os.environ['TWITTER_API_KEY'],
+    #                     consumer_secret=os.environ['TWITTER_API_SECRET_KEY'])
+    #click.echo(token)
+    #friends = client.GetFriends()
+    #for friend in friends:
+    #    click.echo(friend.name)
+
+
 cli.add_command(detail)
 cli.add_command(list)
 cli.add_command(search)
 cli.add_command(strava)
+cli.add_command(twitter)
 
 
 if __name__ == '__main__':
+    readEnvironment()
     cli()
