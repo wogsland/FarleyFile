@@ -1,3 +1,4 @@
 Click==7.0
+PyGithub==1.45
 python-twitter==3.5
 stravaio==0.0.9
