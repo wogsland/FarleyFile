@@ -10,6 +10,10 @@ and the adding your specific credentials. Details on obtaining those credentials
 
 Get your [Github access token](https://github.com/settings/tokens) from the settings.
 
+### LinkedIn
+
+Set up your credentials [here](https://www.linkedin.com/developers/apps).
+
 ### Strava
 
 Follow the [API getting started guide](https://developers.strava.com/docs/getting-started/) provided by Strava to get your access token. Sadly Strava has broken their API so you can no lower access pretty much anything.

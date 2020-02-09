@@ -1,3 +1,4 @@
 Click==7.0
 PyGithub==1.45
+python-linkedin-v2==0.9.4
 python-twitter==3.5

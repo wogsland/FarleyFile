@@ -6,6 +6,7 @@ import twitter as twitterAPI
 
 from datetime import date
 from FarleyFile import Person
+from linkedin_v2 import linkedin as linkedinAPI
 from github import Github
 # from stravaio import StravaIO # was 0.0.9
 
@@ -31,6 +32,7 @@ def printListing(person):
 
 def readEnvironment():
     'This function reads in the environment variables form a file if needed'
+    click.echo('reading environment variables...')
     if os.path.isfile('.env') is True:
         with open('.env', 'r') as file:
             for line in file:
@@ -59,6 +61,7 @@ def add(id, field, value):
 @click.group()
 def cli():
     click.echo('FarleyFile processing...')
+    readEnvironment()
     pass
 
 
@@ -187,6 +190,20 @@ def github(token):
                 json.dump(person, file, indent=2)
 
 
+@click.command(help='Import all your connections from LinkedIn')
+def linkedin():
+    click.echo('Getting LinkedIn...')
+    authentication = linkedinAPI.LinkedInDeveloperAuthentication(
+                        os.environ['LINKEDIN_CONSUMER_KEY'],
+                        os.environ['LINKEDIN_CONSUMER_SECRET'],
+                        os.environ['LINKEDIN_USER_TOKEN'],
+                        os.environ['LINKEDIN_USER_SECRET'],
+                        'https://github.com/wogsland/FarleyFile',
+                        linkedinAPI.PERMISSIONS.enums.values())
+    application = linkedinAPI.LinkedInApplication(authentication)
+    print(application.get_profile())
+
+
 @click.command(help='Lists all your connections')
 def list():
     click.echo('Listing People...')
@@ -251,6 +268,7 @@ def twitter():
 cli.add_command(detail)
 cli.add_command(export)
 cli.add_command(github)
+cli.add_command(linkedin)
 cli.add_command(list)
 cli.add_command(person)
 cli.add_command(search)
@@ -260,5 +278,4 @@ cli.add_command(twitter)
 person.add_command(add)
 
 if __name__ == '__main__':
-    readEnvironment()
     cli()
