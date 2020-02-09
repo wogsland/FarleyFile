@@ -2,11 +2,13 @@ import click
 import json
 import os
 
+
 def getFileNames():
     'This function gets the filenames of the people files'
     fileNames = os.listdir('files')
     fileNames.remove('.gitignore')
     return fileNames
+
 
 def printListing(person):
     'This function prints a one line listing of a person'
@@ -19,10 +21,12 @@ def printListing(person):
         listing = '{} <first name omitted> {}'.format(person['id'], person['lastName'])
     click.echo(listing)
 
+
 @click.group()
 def cli():
     click.echo('Hello World!')
     pass
+
 
 @click.command()
 @click.option('--id', help='ID of the person to get details for', prompt=True)
@@ -37,6 +41,7 @@ def detail(id):
         for key in person.keys():
             click.echo('{}: {}'.format(key, str(person[key])))
 
+
 @click.command()
 def list():
     click.echo('Listing People...')
@@ -44,6 +49,7 @@ def list():
         with open('files/{}'.format(fileName), 'r') as file:
             person = json.load(file)
             printListing(person)
+
 
 @click.command()
 @click.option('--name', help='Name to search for', prompt=True)
@@ -58,9 +64,11 @@ def search(name):
             if firstNameMatch or middleNameMatch or lastNameMatch:
                 printListing(person)
 
+
 cli.add_command(detail)
 cli.add_command(list)
 cli.add_command(search)
+
 
 if __name__ == '__main__':
     cli()
