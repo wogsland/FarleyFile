@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
 import click
 import json
 import os
 import twitter as twitterAPI
 
 from datetime import date
-from farley import Person
+from FarleyFile import Person
 from github import Github
 # from stravaio import StravaIO # was 0.0.9
 
@@ -195,7 +196,7 @@ def list():
             printListing(person)
 
 
-@click.group()
+@click.group(help='Commands for interacting with a person record')
 def person():
     click.echo('Person processing...')
     pass

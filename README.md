@@ -5,9 +5,16 @@ The name here comes from a practice Eisenhower had of keeping an information fil
 
 ## Setup
 
-FarleyFile is a command line tools for keeping track of your contacts. You can begin either by starting to create files on your own or importing your contacts from one of the social media platforms that supports such data exports. Check out the [integrations](INTEGRATIONS.md). To see all the available commands just type
+FarleyFile is a command line tools for keeping track of your contacts.
 
-    python farley.py --help
+    virtualenv venv
+    . venv/bin/activate
+    pip3 install -r requirements.txt
+    pip3 install --editable .
+
+You can begin either by starting to create files on your own or importing your contacts from one of the social media platforms that supports such data exports. Check out the [integrations](INTEGRATIONS.md). To see all the available commands just type
+
+    farley --help
 
 ## Deduping & Merging
 
