@@ -60,6 +60,28 @@ def detail(id):
             click.echo('{}: {}'.format(key, str(person[key])))
 
 
+@click.command(help='Exports all the connections to a single file')
+@click.option('--path', default=None, help='Optional path for the export', prompt=False)
+@click.option('--indent', default=2, help='Optional json indentation', prompt=False)
+def export(path, indent):
+    click.echo('Exporting Files...')
+    if path is None:
+        filePath = 'export.json'
+    else:
+        filePath = '{}/export.json'.format(path)
+    indent = int(indent)
+    export = {
+        'connections': []
+    }
+    for fileName in getFileNames():
+        with open('files/{}'.format(fileName), 'r') as file:
+            personRecord = json.load(file)
+            click.echo('exporting file {}'.format(personRecord['id']))
+            export['connections'].append(personRecord)
+    with open(filePath, 'w') as file:
+        json.dump(export, file, indent=indent)
+
+
 @click.command(help='Imports users you are following from Github')
 @click.option('--token', default=None, help='The Github access token', prompt=False, envvar='GITHUB_ACCESS_TOKEN')
 def github(token):
@@ -158,7 +180,7 @@ def list():
             printListing(person)
 
 
-@click.command(help="Lists all the connections matching a given search term")
+@click.command(help='Lists all the connections matching a given search term')
 @click.option('--name', help='Name to search for', prompt=True)
 def search(name):
     click.echo('Searching People')
@@ -172,7 +194,7 @@ def search(name):
                 printListing(person)
 
 
-@click.command(help="WIP")
+@click.command(help='WIP')
 @click.option('--token', help='The Strava access token', prompt=True)
 def strava(token):
     click.echo('Getting Strava...')
@@ -182,7 +204,7 @@ def strava(token):
         click.echo('{}: {}'.format(key, str(athlete[key])))
 
 
-@click.command(help="WIP")
+@click.command(help='WIP')
 def twitter():
     click.echo('Getting Twitter...')
     print('key: {}'.format(os.environ['TWITTER_API_ACCESS_TOKEN']))
@@ -203,6 +225,7 @@ def twitter():
 
 
 cli.add_command(detail)
+cli.add_command(export)
 cli.add_command(github)
 cli.add_command(list)
 cli.add_command(search)
