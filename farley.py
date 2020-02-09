@@ -2,6 +2,8 @@ import click
 import json
 import os
 
+from stravaio import StravaIO
+
 
 def getFileNames():
     'This function gets the filenames of the people files'
@@ -64,10 +66,19 @@ def search(name):
             if firstNameMatch or middleNameMatch or lastNameMatch:
                 printListing(person)
 
+@click.command()
+@click.option('--token', help='The Strava access token', prompt=True)
+def strava(token):
+    click.echo('Getting Strava...')
+    client = StravaIO(access_token=token)
+    athlete = client.get_logged_in_athlete().to_dict()
+    for key in athlete.keys():
+        click.echo('{}: {}'.format(key, str(athlete[key])))
 
 cli.add_command(detail)
 cli.add_command(list)
 cli.add_command(search)
+cli.add_command(strava)
 
 
 if __name__ == '__main__':

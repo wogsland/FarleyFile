@@ -4,6 +4,10 @@ Contributions welcome!
 
 ### Testing
 
+There are no tests yet
+
+   pytest
+
 ### Linting
 
 Linting can be done with flake8:
