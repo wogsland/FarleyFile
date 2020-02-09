@@ -15,7 +15,8 @@ The current tasks on the roadmap include
 1. Instagram import (is this even possible?)
 1. Strava import (is this even possible?)
 1. Tumblr import
-1. Ability to store files on S3 instead
+1. Store files on S3 instead
+1. Import a previous export
 
 ### Testing
 

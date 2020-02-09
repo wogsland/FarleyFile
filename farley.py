@@ -6,7 +6,7 @@ import twitter as twitterAPI
 from datetime import date
 from farley import Person
 from github import Github
-from stravaio import StravaIO
+# from stravaio import StravaIO # was 0.0.9
 
 
 def getFileNames():
@@ -54,6 +54,7 @@ def add(id, field, value):
     else:
         click.echo('Unfortunately adding to {} is not supported at this time'.format(field))
 
+
 @click.group()
 def cli():
     click.echo('FarleyFile processing...')
@@ -96,7 +97,7 @@ def export(path, indent):
         json.dump(export, file, indent=indent)
 
 
-@click.command(help='Imports users you are following from Github')
+@click.command(help='Imports users you are following from Github')  # noqa: C901
 @click.option('--token', default=None, help='The Github access token', prompt=False, envvar='GITHUB_ACCESS_TOKEN')
 def github(token):
     click.echo('Getting Github...')
@@ -214,6 +215,7 @@ def search(name):
                 printListing(person)
 
 
+"""
 @click.command(help='WIP')
 @click.option('--token', help='The Strava access token', prompt=True)
 def strava(token):
@@ -222,6 +224,7 @@ def strava(token):
     athlete = client.get_logged_in_athlete().to_dict()
     for key in athlete.keys():
         click.echo('{}: {}'.format(key, str(athlete[key])))
+"""
 
 
 @click.command(help='WIP')
@@ -250,7 +253,7 @@ cli.add_command(github)
 cli.add_command(list)
 cli.add_command(person)
 cli.add_command(search)
-cli.add_command(strava)
+# cli.add_command(strava)
 cli.add_command(twitter)
 
 person.add_command(add)
