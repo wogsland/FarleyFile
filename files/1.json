@@ -9,13 +9,15 @@
   "metWhere":"never",
   "metWhen":"never",
   "interactions":{},
-  "twitter":"",
+  "twitterUrl":"",
   "github":"",
   "githubUrl":"",
-  "facebook":"",
-  "linkedIn":"",
-  "tumbler":"",
+  "instagramUrl":"",
+  "facebookUrl":"",
+  "linkedInUrl":"",
+  "tumblrUrl":"",
   "dislikes":{},
   "allergies":{},
-  "likes":["Mary Jane", "Aunt May"]
+  "likes":["Mary Jane", "Aunt May"],
+  "email": ""
 }

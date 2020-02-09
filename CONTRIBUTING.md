@@ -2,6 +2,21 @@
 
 Contributions welcome!
 
+### Roadmap
+
+The current tasks on the roadmap include
+
+1. Interface to create/view/edit files
+1. Interface to merge files
+1. Google contacts import
+1. Twitter import
+1. LinkedIn import
+1. Facebook import
+1. Instagram import (is this even possible?)
+1. Strava import (is this even possible?)
+1. Tumblr import
+1. Ability to store files on S3 instead
+
 ### Testing
 
 There are no tests yet

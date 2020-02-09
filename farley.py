@@ -66,10 +66,7 @@ def github(token):
     click.echo('Getting Github...')
     client = Github(str(token))
 
-    i = 0
     for follower in client.get_user().get_following():
-        #print('{} ({})'.format(follower.login, follower.name))
-
         # Assemble person information
         note = 'Following on Github as of {}'.format(date.today())
         notes = [note]
@@ -82,7 +79,7 @@ def github(token):
             'githubUrl': github_url,
             'notes': notes
         }
-        if None != follower.name:
+        if follower.name is not None:
             names = follower.name.split(' ')
             if len(names) > 0:
                 firstName = names[0]
@@ -105,8 +102,11 @@ def github(token):
                     matchesGithub = (personRecord['github'] == person['github'])
                 if 'githubUrl' in personRecord:
                     matchesGithubUrl = (personRecord['githubUrl'] == person['githubUrl'])
-                if 'firstName' in personRecord and 'firstName' in person and 'lastName' in personRecord and 'lastName' in person:
-                    matchesName = (personRecord['firstName'] == person['firstName'] and personRecord['lastName'] == person['lastName'])
+                if 'firstName' in personRecord and 'firstName' in person:
+                    matchesFirstName = (personRecord['firstName'] == person['firstName'])
+                if 'lastName' in personRecord and 'lastName' in person:
+                    matchesLastName = (personRecord['lastName'] == person['lastName'])
+                matchesName = matchesFirstName and matchesLastName
                 if matchesGithub or matchesGithubUrl or matchesName:
                     match = fileName
                     updated = False
@@ -140,8 +140,7 @@ def github(token):
                         with open('files/{}'.format(fileName), 'w') as file:
                             json.dump(personRecord, file, indent=2)
 
-
-        if None == match:
+        if match is None:
             id = str(len(fileNames) + 1)
             fileName = 'files/{}.json'.format(id)
             person['id'] = id
@@ -172,6 +171,7 @@ def search(name):
             if firstNameMatch or middleNameMatch or lastNameMatch:
                 printListing(person)
 
+
 @click.command(help="WIP")
 @click.option('--token', help='The Strava access token', prompt=True)
 def strava(token):
@@ -187,18 +187,18 @@ def twitter():
     click.echo('Getting Twitter...')
     print('key: {}'.format(os.environ['TWITTER_API_ACCESS_TOKEN']))
     client = twitterAPI.Api(consumer_key=os.environ['TWITTER_API_KEY'],
-                         consumer_secret=os.environ['TWITTER_API_SECRET_KEY'],
-                         access_token_key=os.environ['TWITTER_API_ACCESS_TOKEN'],
-                         access_token_secret=os.environ['TWITTER_API_ACCESS_TOKEN_SECRET'])
+                            consumer_secret=os.environ['TWITTER_API_SECRET_KEY'],
+                            access_token_key=os.environ['TWITTER_API_ACCESS_TOKEN'],
+                            access_token_secret=os.environ['TWITTER_API_ACCESS_TOKEN_SECRET'])
     click.echo(client)
     cred = client.VerifyCredentials()
     click.echo(cred)
-    #user = client.GetUser('wogsland')
-    #token = client.GetAppOnlyAuthToken(consumer_key=os.environ['TWITTER_API_KEY'],
+    # user = client.GetUser('wogsland')
+    # token = client.GetAppOnlyAuthToken(consumer_key=os.environ['TWITTER_API_KEY'],
     #                     consumer_secret=os.environ['TWITTER_API_SECRET_KEY'])
-    #click.echo(token)
-    #friends = client.GetFriends()
-    #for friend in friends:
+    # click.echo(token)
+    # friends = client.GetFriends()
+    # for friend in friends:
     #    click.echo(friend.name)
 
 

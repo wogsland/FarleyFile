@@ -3,28 +3,24 @@ FarleyFile
 
 The name here comes from a practice Eisenhower had of keeping an information file on everybody he knew so that he could review it before interacting with them. There's a lot of information out there on the web about the people we know, and the aim of this project is to help people reclaim control of the data regarding the people that they know and store it in a single place.
 
-# Setup
+## Setup
 
-You can begin either by starting to create files on your own or importing your contacts from one of the social media platforms that supports such data exports.
+FarleyFile is a command line tools for keeping track of your contacts. You can begin either by starting to create files on your own or importing your contacts from one of the social media platforms that supports such data exports. Check out the [integrations](INTEGRATIONS.md). To see all the available commands just type
 
-# Deduping & Merging
+    python farley.py --help
 
-If you import from a number of social media platforms then merging duplicate contacts will be required and there is functionality to do this automagically as well as manually when there are conflicts.
+## Deduping & Merging
 
-# Contributing
+If you import from a number of social media platforms then merging duplicate contacts will be required and there should functionality to do this automagically as well as manually when there are conflicts (TBD).
 
-Contributions are welcome. The current tasks on the roadmap include
+## Issues
 
-1. Login
-1. Listing of Farley files
-1. Interface to create/view/edit files
-1. Search on file listing
-1. Interface to merge files
-1. Twitter import
-1. LinkedIn import
-1. Facebook import
-1. Ability to store files on S3 instead
+If you run into an issue, you can file it [here](https://github.com/wogsland/FarleyFile/issues/new).
 
-# License
+## Contributing
+
+Contributions are welcome! Check out our [contributing page](CONTRIBUTING.md).
+
+## License
 
 This is a tool for anyone to use and so I've licensed it under the [MIT license](LICENSE.md).
