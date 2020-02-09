@@ -253,17 +253,28 @@ def twitter():
                             consumer_secret=os.environ['TWITTER_API_SECRET_KEY'],
                             access_token_key=os.environ['TWITTER_API_ACCESS_TOKEN'],
                             access_token_secret=os.environ['TWITTER_API_ACCESS_TOKEN_SECRET'])
-    click.echo(client)
-    cred = client.VerifyCredentials()
-    click.echo(cred)
+    # click.echo(client)
+    # cred = client.VerifyCredentials()
+    # click.echo(cred)
     # user = client.GetUser('wogsland')
     # token = client.GetAppOnlyAuthToken(consumer_key=os.environ['TWITTER_API_KEY'],
     #                     consumer_secret=os.environ['TWITTER_API_SECRET_KEY'])
     # click.echo(token)
-    # friends = client.GetFriends()
-    # for friend in friends:
-    #    click.echo(friend.name)
 
+    if os.path.isfile('temp.txt') is False:
+        print('no temp file exists')
+        rl = client.rate_limit
+        print(rl.get_limit('friends/ids'))
+        friends = client.GetFriendIDs(screen_name='wogsland')
+        with open('temp.txt', 'w') as file:
+            file.write(','.join([str(friend) for friend in friends]))
+    with open('temp.txt', 'r') as file:
+        users = file.read().split(',')
+    twitterId = users[1]
+    user = client.GetUser(twitterId)
+    twitterName = user.name
+    twitterHandle = user.screen_name
+    print('{} name: {} handle: {}'.format(twitterId, twitterName, twitterHandle))
 
 cli.add_command(detail)
 cli.add_command(export)
