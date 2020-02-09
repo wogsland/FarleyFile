@@ -4,6 +4,7 @@ import os
 import twitter as twitterAPI
 
 from datetime import date
+from farley import Person
 from github import Github
 from stravaio import StravaIO
 
@@ -39,6 +40,19 @@ def readEnvironment():
                 key, value = line.split('=', 1)
                 os.environ[key] = value[:-1]
 
+
+@click.command(help='Allows for addition to a specific person')
+@click.option('--id', help='ID of the person to add to', prompt=True)
+@click.option('--field', help='Field to add', prompt=True)
+@click.option('--value', help='Value to add to the field', prompt=True)
+def add(id, field, value):
+    click.echo('Adding details to person...')
+    person = Person(id)
+    if 'email' == field:
+        click.echo('Adding email {} to {}...'.format(value, person.json['firstName']))
+        person.addEmail(value)
+    else:
+        click.echo('Unfortunately adding to {} is not supported at this time'.format(field))
 
 @click.group()
 def cli():
@@ -180,6 +194,12 @@ def list():
             printListing(person)
 
 
+@click.group()
+def person():
+    click.echo('Person processing...')
+    pass
+
+
 @click.command(help='Lists all the connections matching a given search term')
 @click.option('--name', help='Name to search for', prompt=True)
 def search(name):
@@ -228,10 +248,12 @@ cli.add_command(detail)
 cli.add_command(export)
 cli.add_command(github)
 cli.add_command(list)
+cli.add_command(person)
 cli.add_command(search)
 cli.add_command(strava)
 cli.add_command(twitter)
 
+person.add_command(add)
 
 if __name__ == '__main__':
     readEnvironment()

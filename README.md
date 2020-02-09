@@ -24,3 +24,5 @@ Contributions are welcome! Check out our [contributing page](CONTRIBUTING.md).
 ## License
 
 This is a tool for anyone to use and so I've licensed it under the [MIT license](LICENSE.md).
+
+![I like Ike](https://upload.wikimedia.org/wikipedia/commons/f/f8/Dwight_D._Eisenhower_as_General_of_the_Army_crop.jpg)
