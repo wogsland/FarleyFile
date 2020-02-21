@@ -31,7 +31,7 @@ def printListing(person):
 
 
 def readEnvironment():
-    'This function reads in the environment variables form a file if needed'
+    'This function reads in the environment variables from a file if needed'
     click.echo('reading environment variables...')
     if os.path.isfile('.env') is True:
         with open('.env', 'r') as file:
@@ -194,12 +194,12 @@ def github(token):
 def linkedin():
     click.echo('Getting LinkedIn...')
     authentication = linkedinAPI.LinkedInDeveloperAuthentication(
-                        os.environ['LINKEDIN_CONSUMER_KEY'],
-                        os.environ['LINKEDIN_CONSUMER_SECRET'],
-                        os.environ['LINKEDIN_USER_TOKEN'],
-                        os.environ['LINKEDIN_USER_SECRET'],
-                        'https://github.com/wogsland/FarleyFile',
-                        linkedinAPI.PERMISSIONS.enums.values())
+        os.environ['LINKEDIN_CONSUMER_KEY'],
+        os.environ['LINKEDIN_CONSUMER_SECRET'],
+        os.environ['LINKEDIN_USER_TOKEN'],
+        os.environ['LINKEDIN_USER_SECRET'],
+        'https://github.com/wogsland/FarleyFile',
+        linkedinAPI.PERMISSIONS.enums.values())
     application = linkedinAPI.LinkedInApplication(authentication)
     print(application.get_profile())
 
@@ -275,6 +275,7 @@ def twitter():
     twitterName = user.name
     twitterHandle = user.screen_name
     print('{} name: {} handle: {}'.format(twitterId, twitterName, twitterHandle))
+
 
 cli.add_command(detail)
 cli.add_command(export)
