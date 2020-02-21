@@ -19,5 +19,8 @@
   "dislikes": [],
   "allergies": [],
   "likes": [],
-  "emails": []
+  "emails": [
+    "peter.parker@gmail.com",
+    "pparker@oscorp.biz"
+  ]
 }
