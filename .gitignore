@@ -5,3 +5,4 @@ test.py
 export.json
 *.pyc
 *.egg-info
+temp.txt
