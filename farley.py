@@ -5,7 +5,7 @@ import os
 import twitter as twitterAPI
 
 from datetime import date
-from FarleyFile import Person
+from FarleyFile import Person, Files
 from linkedin_v2 import linkedin as linkedinAPI
 from github import Github
 from stravaio import StravaIO # was 0.0.9
@@ -13,9 +13,8 @@ from stravaio import StravaIO # was 0.0.9
 
 def getFileNames():
     'This function gets the filenames of the people files'
-    fileNames = os.listdir('files')
-    fileNames.remove('.gitignore')
-    return fileNames
+    files = Files()
+    return files.getFileNames()
 
 
 def printListing(person):

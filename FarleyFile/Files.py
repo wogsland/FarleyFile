@@ -13,8 +13,16 @@ class Files():
         fileNames.remove('.gitignore')
         return fileNames
 
+    def getNextFileID(self):
+        'gets the next expected fileID'
+        def getID(fileName):
+            pieces = fileName.split('.')
+            return int(pieces[0])
+        fileIDs = list(map(getID, self.getFileNames()))
+        fileIDs.sort()
+        lastFileID = fileIDs.pop()
+        return lastFileID + 1
+
     def getNextFileName(self):
         'gets the next expected fileName'
-        lastFileName = self.getFileNames().pop()
-        pieces = lastFileName.split('.')
-        return '{}.json'.format(pieces[0])
+        return '{}.json'.format(self.getNextFileID())
