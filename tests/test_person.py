@@ -19,3 +19,11 @@ class TestPerson(TestCase):
         self.assertEqual(2, len(person.json['emails']))
         self.assertEqual(person.json['emails'][0], email)
         self.assertEqual(person.json['emails'][1], email2)
+
+        'check email cannot be added twice'
+        person.addEmail(email2)
+        self.assertEqual(2, len(person.json['emails']))
+
+        'clean-up'
+        person.removeEmail(email2)
+        self.assertEqual(1, len(person.json['emails']))

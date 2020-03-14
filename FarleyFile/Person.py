@@ -38,3 +38,15 @@ class Person():
             self.json['email'] = email
             with open(self.fileName, 'w') as file:
                 json.dump(self.json, file, indent=2)
+
+    def removeEmail(self, email):
+        'removes email from connection'
+        if 'email' in self.json:
+            if email == self.json['email']:
+                self.json.pop('email')
+                with open(self.fileName, 'w') as file:
+                    json.dump(self.json, file, indent=2)
+        elif 'emails' in self.json:
+            self.json['emails'].remove(email)
+            with open(self.fileName, 'w') as file:
+                json.dump(self.json, file, indent=2)
