@@ -275,7 +275,6 @@ def twitter():
     print('{} name: {} handle: {}'.format(twitterId, twitterName, twitterHandle))
 
 
-cli.add_command(add)
 cli.add_command(detail)
 cli.add_command(export)
 cli.add_command(github)
