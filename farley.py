@@ -62,12 +62,16 @@ def dupes():
     click.echo('Gathering potential duplicates (first/last name matches)...')
     for fileName1 in getFileNames():
         for fileName2 in getFileNames():
-            if fileName1 != fileName2:
+            if fileName1 < fileName2:
                 with open('files/{}'.format(fileName1), 'r') as file1:
                     with open('files/{}'.format(fileName2), 'r') as file2:
                         person1 = json.load(file1)
                         person2 = json.load(file2)
-                        if person1['firstName'] == person2['firstName'] and person1['lastName'] == person2['lastName']:
+                        firstNamesExist = 'firstName' in person1 and 'firstName' in person2
+                        firstNamesSame = firstNamesExist and person1['firstName'] == person2['firstName']
+                        lastNamesExist = 'lastName' in person1 and 'lastName' in person2
+                        lastNamesSame = lastNamesExist and person1['lastName'] == person2['lastName']
+                        if firstNamesSame and lastNamesSame:
                             print('Potential duplicates:')
                             printListing(person1)
                             printListing(person2)
