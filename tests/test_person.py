@@ -1,5 +1,5 @@
 from unittest import TestCase
-from FarleyFile.Person import Person
+from FarleyFile import Person
 
 
 class TestPerson(TestCase):
