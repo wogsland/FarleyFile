@@ -15,6 +15,6 @@ class Files():
 
     def getNextFileName(self):
         'gets the next expected fileName'
-        lastFileName = self.getFileNames()
-        pieces = lastFileName.split()
+        lastFileName = self.getFileNames().pop()
+        pieces = lastFileName.split('.')
         return '{}.json'.format(pieces[0])
