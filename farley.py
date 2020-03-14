@@ -8,7 +8,7 @@ from datetime import date
 from FarleyFile import Person, Files
 from linkedin_v2 import linkedin as linkedinAPI
 from github import Github
-from stravaio import StravaIO # was 0.0.9
+# from stravaio import StravaIO # was 0.0.9
 
 
 def getFileNames():
