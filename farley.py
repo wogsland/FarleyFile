@@ -190,7 +190,7 @@ def github(token):
                 json.dump(person, file, indent=2)
 
 
-@click.command(help='Import all your connections from LinkedIn')
+@click.command(help='WIP - Import all your connections from LinkedIn')
 def linkedin():
     click.echo('Getting LinkedIn...')
     authentication = linkedinAPI.LinkedInDeveloperAuthentication(
@@ -233,8 +233,7 @@ def search(name):
                 printListing(person)
 
 
-"""
-@click.command(help='WIP')
+@click.command(help='WIP - imports Strava connections')
 @click.option('--token', help='The Strava access token', prompt=True)
 def strava(token):
     click.echo('Getting Strava...')
@@ -242,10 +241,9 @@ def strava(token):
     athlete = client.get_logged_in_athlete().to_dict()
     for key in athlete.keys():
         click.echo('{}: {}'.format(key, str(athlete[key])))
-"""
 
 
-@click.command(help='WIP')
+@click.command(help='WIP - imports Twitter connections')
 def twitter():
     click.echo('Getting Twitter...')
     print('key: {}'.format(os.environ['TWITTER_API_ACCESS_TOKEN']))
@@ -277,15 +275,16 @@ def twitter():
     print('{} name: {} handle: {}'.format(twitterId, twitterName, twitterHandle))
 
 
+cli.add_command(add)
 cli.add_command(detail)
 cli.add_command(export)
 cli.add_command(github)
-cli.add_command(linkedin)
+# cli.add_command(linkedin)
 cli.add_command(list)
 cli.add_command(person)
 cli.add_command(search)
 # cli.add_command(strava)
-cli.add_command(twitter)
+# cli.add_command(twitter)
 
 person.add_command(add)
 

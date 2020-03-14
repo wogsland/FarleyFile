@@ -10,14 +10,14 @@ and the adding your specific credentials. Details on obtaining those credentials
 
 Get your [Github access token](https://github.com/settings/tokens) from the settings.
 
-### LinkedIn
+### LinkedIn - WIP
 
 Set up your credentials [here](https://www.linkedin.com/developers/apps).
 
-### Strava
+### Strava - WIP
 
 Follow the [API getting started guide](https://developers.strava.com/docs/getting-started/) provided by Strava to get your access token. Sadly Strava has broken their API so you can no lower access pretty much anything.
 
-### Twitter
+### Twitter - WIP
 
-Create a [Twitter App](https://apps.twitter.com/) and go to "Kays and tokens" for that app to obtain the four credentials needed.
+Create a [Twitter App](https://apps.twitter.com/) and go to "Keys and tokens" for that app to obtain the four credentials needed.

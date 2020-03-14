@@ -7,6 +7,7 @@ Contributions welcome!
 The current tasks on the roadmap include
 
 1. Interface to create/view/edit files
+1. File validation
 1. Deduping/merging
 1. Google contacts import
 1. Twitter import
