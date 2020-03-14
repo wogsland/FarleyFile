@@ -3,8 +3,8 @@ import os
 
 
 class Person():
-    def __init__(self, id):
-        'Initialization'
+    def __init__(self, id=None):
+        'Initialization with an id coresponding to a filename'
         self.id = id
         self.json = None
         self.fileName = None
@@ -50,3 +50,9 @@ class Person():
             self.json['emails'].remove(email)
             with open(self.fileName, 'w') as file:
                 json.dump(self.json, file, indent=2)
+
+    def create(self, fields):
+        'creates a new person file from the fields'
+        'gets next filename'
+        'validates fields'
+        'creates file removing invalid fields'

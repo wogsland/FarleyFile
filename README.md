@@ -16,9 +16,13 @@ You can begin either by starting to create files on your own or importing your c
 
     farley --help
 
-## Deduping & Merging
+## Deduping & Merging - WIP
 
 If you import from a number of social media platforms then merging duplicate contacts will be required and there should functionality to do this automagically as well as manually when there are conflicts (TBD).
+
+### Maintainer
+
+1. [Bradley Wogsland](https://github.com/wogsland)
 
 ## Issues
 

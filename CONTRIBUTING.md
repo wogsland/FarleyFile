@@ -19,6 +19,8 @@ The current tasks on the roadmap include
 1. Tumblr import
 1. Store files on S3 instead
 1. Import a previous export
+1. Executable packaging
+1. Ability to `brew install` packaged executable
 
 ### Testing
 

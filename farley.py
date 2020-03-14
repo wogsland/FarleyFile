@@ -8,7 +8,7 @@ from datetime import date
 from FarleyFile import Person
 from linkedin_v2 import linkedin as linkedinAPI
 from github import Github
-# from stravaio import StravaIO # was 0.0.9
+from stravaio import StravaIO # was 0.0.9
 
 
 def getFileNames():
@@ -57,6 +57,21 @@ def add(id, field, value):
     else:
         click.echo('Unfortunately adding to {} is not supported at this time'.format(field))
 
+
+@click.command(help='Allows for addition to a specific person')
+def dupes():
+    click.echo('Gathering potential duplicates (first/last name matches)...')
+    for fileName1 in getFileNames():
+        for fileName2 in getFileNames():
+            if fileName1 != fileName2:
+                with open('files/{}'.format(fileName1), 'r') as file1:
+                    with open('files/{}'.format(fileName2), 'r') as file2:
+                        person1 = json.load(file1)
+                        person2 = json.load(file2)
+                        if person1['firstName'] == person2['firstName'] and person1['lastName'] == person2['lastName']:
+                            print('Potential duplicates:')
+                            printListing(person1)
+                            printListing(person2)
 
 @click.group()
 def cli():
@@ -286,6 +301,7 @@ cli.add_command(search)
 # cli.add_command(twitter)
 
 person.add_command(add)
+person.add_command(dupes)
 
 if __name__ == '__main__':
     cli()
