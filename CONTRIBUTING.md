@@ -8,14 +8,14 @@ The current tasks on the roadmap include
 
 1. Interface to create/view/edit files
 1. File validation
-2. File import
+1. File import
 1. Deduping/merging
 1. Google contacts import
-1. Twitter import
-1. LinkedIn import
+1. Twitter import - WIP
+1. LinkedIn import - WIP
 1. Facebook import
 1. Instagram import (is this even possible?)
-1. Strava import (is this even possible?)
+1. Strava import (is this even possible?) - WIP
 1. Tumblr import
 1. Store files on S3 instead
 1. Import a previous export
@@ -24,7 +24,7 @@ The current tasks on the roadmap include
 
 ### Testing
 
-There are no tests yet
+The tests can be run simply with
 
    pytest
 

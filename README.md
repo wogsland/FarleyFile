@@ -16,9 +16,23 @@ You can begin either by starting to create files on your own or importing your c
 
     farley --help
 
+## Importing
+
+The idea to integrate with all major social media platforms, but currently only Github and Twitter are supported. More information on the [integrations page](INTEGRATIONS.md).
+
 ## Deduping & Merging - WIP
 
-If you import from a number of social media platforms then merging duplicate contacts will be required and there should functionality to do this automagically as well as manually when there are conflicts (TBD).
+If you import from a number of social media platforms then merging duplicate contacts will be required and there should functionality to do this automagically but for now we have
+
+    farley person dupes
+
+to list out everybody with a matching first and last name.
+
+## Searching
+
+Basic search functionality is provided with
+
+    farley search
 
 ### Maintainer
 
