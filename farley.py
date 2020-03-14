@@ -8,7 +8,7 @@ from datetime import date
 from FarleyFile import Person, Files
 from linkedin_v2 import linkedin as linkedinAPI
 from github import Github
-from stravaio import StravaIO # was 0.0.9
+#from stravaio import StravaIO # was 0.0.9
 
 
 def getFileNames():
@@ -247,14 +247,14 @@ def search(name):
                 printListing(person)
 
 
-@click.command(help='WIP - imports Strava connections')
-@click.option('--token', help='The Strava access token', prompt=True)
-def strava(token):
-    click.echo('Getting Strava...')
-    client = StravaIO(access_token=token)
-    athlete = client.get_logged_in_athlete().to_dict()
-    for key in athlete.keys():
-        click.echo('{}: {}'.format(key, str(athlete[key])))
+#@click.command(help='WIP - imports Strava connections')
+#@click.option('--token', help='The Strava access token', prompt=True)
+#def strava(token):
+#    click.echo('Getting Strava...')
+#    client = StravaIO(access_token=token)
+#    athlete = client.get_logged_in_athlete().to_dict()
+#    for key in athlete.keys():
+#        click.echo('{}: {}'.format(key, str(athlete[key])))
 
 
 @click.command(help='WIP - imports Twitter connections')
