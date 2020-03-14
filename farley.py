@@ -260,19 +260,11 @@ def search(name):
 @click.command(help='WIP - imports Twitter connections')
 def twitter():
     click.echo('Getting Twitter...')
-    print('key: {}'.format(os.environ['TWITTER_API_ACCESS_TOKEN']))
     client = twitterAPI.Api(consumer_key=os.environ['TWITTER_API_KEY'],
                             consumer_secret=os.environ['TWITTER_API_SECRET_KEY'],
                             access_token_key=os.environ['TWITTER_API_ACCESS_TOKEN'],
                             access_token_secret=os.environ['TWITTER_API_ACCESS_TOKEN_SECRET'])
-    # click.echo(client)
-    # cred = client.VerifyCredentials()
-    # click.echo(cred)
-    # user = client.GetUser('wogsland')
-    # token = client.GetAppOnlyAuthToken(consumer_key=os.environ['TWITTER_API_KEY'],
-    #                     consumer_secret=os.environ['TWITTER_API_SECRET_KEY'])
-    # click.echo(token)
-
+    files = Files()
     if os.path.isfile('temp.txt') is False:
         print('no temp file exists')
         rl = client.rate_limit
@@ -282,11 +274,52 @@ def twitter():
             file.write(','.join([str(friend) for friend in friends]))
     with open('temp.txt', 'r') as file:
         users = file.read().split(',')
-    twitterId = users[1]
-    user = client.GetUser(twitterId)
-    twitterName = user.name
-    twitterHandle = user.screen_name
-    print('{} name: {} handle: {}'.format(twitterId, twitterName, twitterHandle))
+        for twitterId in users:
+
+            # check if it's a dupe
+            match = False
+            for file in files.getFileNames():
+                with open('files/{}'.format(file), 'r') as file:
+                    testPerson = json.load(file)
+                    if 'twitterId' in testPerson and twitterId == testPerson['twitterId']:
+                        match = True
+                        print('skipping id {} as a dupe'.format(twitterId))
+                        continue
+            if match:
+                continue
+
+            # Assemble person information
+            user = client.GetUser(twitterId)
+            twitterName = user.name
+            twitterHandle = user.screen_name
+            twitterUrl = 'https://twitter.com/{}'.format(twitterHandle)
+            note = 'Friend on Twitter as of {}'.format(date.today())
+            notes = [note]
+            id = files.getNextFileID()
+            person = {
+                'id': id,
+                'twitterId': twitterId,
+                'twitter': twitterHandle,
+                'twitterUrl': twitterUrl,
+                'notes': notes
+            }
+            if twitterName is not None:
+                names = twitterName.split(' ')
+                if len(names) > 0:
+                    firstName = names[0]
+                    person['firstName'] = firstName
+                if len(names) > 1:
+                    names.pop(0)
+                    lastName = ' '.join(names)
+                    person['lastName'] = lastName
+
+            if match:
+                print('{} name: {} handle: {} skipped as a dupe'.format(twitterId, twitterName, twitterHandle))
+            else:
+                fileName = 'files/{}.json'.format(id)
+                with open(fileName, 'w') as file:
+                    json.dump(person, file, indent=2)
+                print('{} name: {} handle: {} created'.format(twitterId, twitterName, twitterHandle))
 
 
 cli.add_command(detail)
@@ -297,7 +330,7 @@ cli.add_command(list)
 cli.add_command(person)
 cli.add_command(search)
 # cli.add_command(strava)
-# cli.add_command(twitter)
+cli.add_command(twitter)
 
 person.add_command(add)
 person.add_command(dupes)
